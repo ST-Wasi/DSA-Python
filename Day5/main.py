@@ -73,59 +73,60 @@
 # for i in range(5):
 #     print(fibonacci(i))
 
-def isSafe(board, row,col,n):
-
-    # Horizontaly safe check
-    for j in  range(n):
+def isSafe(board, row, col, n):
+    # Horizontally safe check
+    for j in range(n):
         if board[row][j] == "Q":
             return False
     
-    # Verticaly Safe Check
+    # Vertically Safe Check
     for i in range(n):
         if board[i][col] == "Q":
             return False
     
-    # Right Diagnal safe check
-    i , j = row, col
+    # Right Diagonal safe check
+    i, j = row, col
     while i >= 0 and j < n:
         if board[i][j] == "Q":
             return False
         i = i - 1
         j = j + 1
 
-    # Left Diagnal safe check
-    i , j = row, col
-    while i >=0 and j >=0:
+    # Left Diagonal safe check
+    i, j = row, col
+    while i >= 0 and j >= 0:
         if board[i][j] == "Q":
             return False
-        i = i-1
-        j = j-1
+        i = i - 1
+        j = j - 1
 
     return True
 
 
-def solveNQueens(board,row, n, solution):
+def solveNQueens(board, row, n, solution):
     if row == n:
-        solution.append(" ".join(r) for r in board)
+        solution.append(["".join(r) for r in board])
         return
     
     for col in range(n):
-        if isSafe(board,row,col,n):
+        if isSafe(board, row, col, n):
             board[row][col] = "Q"
-            solveNQueens(board,row+1, col, solution)
-            board[row][col] = "." # back Track
+            solveNQueens(board, row + 1, n, solution)
+            board[row][col] = "."  # back track
 
 
 def main_function(n):
     board = [["." for _ in range(n)] for _ in range(n)]
     solution = []
-    solveNQueens(board,0,n,solution)
+    solveNQueens(board, 0, n, solution)
+    return solution
+
 
 n = 4
 solution = main_function(n)
 
-for idx, sol in enumerate(solution,1):
-    print(f"Solution {idx}: ")
+for idx, sol in enumerate(solution, 1):
+    # print(f"{idx}: ")
     for row in sol:
         print(row)
     print()
