@@ -73,60 +73,73 @@
 # for i in range(5):
 #     print(fibonacci(i))
 
-def isSafe(board, row, col, n):
-    # Horizontally safe check
-    for j in range(n):
-        if board[row][j] == "Q":
-            return False
+# def isSafe(board, row, col, n):
+#     # Horizontally safe check
+#     for j in range(n):
+#         if board[row][j] == "Q":
+#             return False
     
-    # Vertically Safe Check
-    for i in range(n):
-        if board[i][col] == "Q":
-            return False
+#     # Vertically Safe Check
+#     for i in range(n):
+#         if board[i][col] == "Q":
+#             return False
     
-    # Right Diagonal safe check
-    i, j = row, col
-    while i >= 0 and j < n:
-        if board[i][j] == "Q":
-            return False
-        i = i - 1
-        j = j + 1
+#     # Right Diagonal safe check
+#     i, j = row, col
+#     while i >= 0 and j < n:
+#         if board[i][j] == "Q":
+#             return False
+#         i = i - 1
+#         j = j + 1
 
-    # Left Diagonal safe check
-    i, j = row, col
-    while i >= 0 and j >= 0:
-        if board[i][j] == "Q":
-            return False
-        i = i - 1
-        j = j - 1
+#     # Left Diagonal safe check
+#     i, j = row, col
+#     while i >= 0 and j >= 0:
+#         if board[i][j] == "Q":
+#             return False
+#         i = i - 1
+#         j = j - 1
 
-    return True
+#     return True
 
 
-def solveNQueens(board, row, n, solution):
-    if row == n:
-        solution.append(["".join(r) for r in board])
-        return
+# def solveNQueens(board, row, n, solution):
+#     if row == n:
+#         solution.append(["".join(r) for r in board])
+#         return
     
-    for col in range(n):
-        if isSafe(board, row, col, n):
-            board[row][col] = "Q"
-            solveNQueens(board, row + 1, n, solution)
-            board[row][col] = "."  # back track
+#     for col in range(n):
+#         if isSafe(board, row, col, n):
+#             board[row][col] = "Q"
+#             solveNQueens(board, row + 1, n, solution)
+#             board[row][col] = "."  # back track
 
 
-def main_function(n):
-    board = [["." for _ in range(n)] for _ in range(n)]
-    solution = []
-    solveNQueens(board, 0, n, solution)
-    return solution
+# def main_function(n):
+#     board = [["." for _ in range(n)] for _ in range(n)]
+#     solution = []
+#     solveNQueens(board, 0, n, solution)
+#     return solution
 
 
-n = 4
-solution = main_function(n)
+# n = 4
+# solution = main_function(n)
 
-for idx, sol in enumerate(solution, 1):
-    # print(f"{idx}: ")
-    for row in sol:
-        print(row)
-    print()
+# for idx, sol in enumerate(solution, 1):
+#     # print(f"{idx}: ")
+#     for row in sol:
+#         print(row)
+#     print()
+
+def firstUniqChar(s):
+        char_count = {}
+        for char in s:
+            if char in char_count:
+                char_count[char] = char_count[char] + 1
+            else:
+                char_count[char] = 1
+        for i in range(len(s)):
+            char = s[i] 
+            if char_count[char] == 1:
+                return i  
+        return -1
