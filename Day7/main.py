@@ -27,10 +27,10 @@ def preorder(root): # Root ---> Left ----> Right
         preorder(root.left)
         preorder(root.right)
 
-def inorder(root): # Left ---> Root --> Right
+def inorder(root): # Left ---> Root --> Right 
     if root != None:
-        inorder(root.left)
         print(root.data, end=" ")
+        inorder(root.left)
         inorder(root.right)
 
 def postorder(root): # Left --> Right ---> Root
@@ -40,7 +40,7 @@ def postorder(root): # Left --> Right ---> Root
         print(root.data, end=" ")
 
 
-root = buildTree([1,2,-1,-1,3,4,-1,5,-1,-1])
+root = buildTree([12,7,17,3,9,14,-1])
 
 # inorder(root)
 # print("")
@@ -95,6 +95,38 @@ def main_function():
         print()
  
 
-main_function()
+# main_function()
 
 
+def kth_largest_element(root,k):
+    counter = [0]
+    result = [None]
+    def reverse_inorder(root):
+        if not root or result[0] is not None:
+            return
+        reverse_inorder(root.right)
+
+        counter[0] += 1
+        if(counter[0] == k):
+            result[0] = root.data
+            return
+        
+        reverse_inorder(root.left)
+
+    reverse_inorder(root)
+    return result[0] if result[0] is not None else -10**9 # Int min
+
+# print(kth_largest_element(root,2))
+inorder(root)
+
+
+# def reverse_inorder(root):
+#     if not root:
+#         return
+#     reverse_inorder(root.right)
+
+#     print(root.data)
+        
+#     reverse_inorder(root.left)
+
+# reverse_inorder(root)
